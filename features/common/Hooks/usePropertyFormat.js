@@ -16,6 +16,18 @@ export const usePropertyFormat = (property) => {
   const sqSize = property?.area?.toFixed(2);
   const externalID = property?.externalID;
 
+  const photos = property?.photos?.map((photo) => photo.url) || [];
+  const description = property?.description;
+  const coverVideo = property?.coverVideo?.url.split("/")[3];
+  // console.log("coverrrrr", coverVideo);
+  const panorama = property?.panoramas?.length ? property.panoramas[0].url : [];
+
+  const amenities = property?.amenities
+    ?.flatMap(({ amenities }) => amenities)
+    .map((item) => item.text);
+
+  const furshied = property?.furnishingStatus;
+
   return {
     address,
     coverPhoto,
@@ -27,5 +39,11 @@ export const usePropertyFormat = (property) => {
     purpose,
     sqSize,
     externalID,
+    photos,
+    description,
+    coverVideo,
+    panorama,
+    amenities,
+    furshied,
   };
 };
